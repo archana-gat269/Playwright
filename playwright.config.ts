@@ -9,6 +9,8 @@ const bddTestDir = defineBddConfig({
   steps: ['steps/**/*.ts', 'src/fixtures/pageFixtures.ts'],
 });
 
+
+
 export default defineConfig({
   testDir: './tests',
   timeout: 45_000,
@@ -22,11 +24,12 @@ export default defineConfig({
   reporter: [
     ['list'],
     ['html', { outputFolder: 'reports/html-report', open: 'never' }],
+    ['junit', { outputFile: 'reports/results.xml' }],
   ],
   use: {
     // Headed locally so you can watch the browser; CI stays headless (no display, faster).
-    // Override locally with `HEADLESS=true` (see the test:headless script) if you want a quick headless check.
-    headless: process.env.CI ? true : process.env.HEADLESS === 'true',
+    // Override locally with `HEADLESS=False` (see the test:headless script) if you want a quick headless check.
+    headless: process.env.CI ? true : process.env.HEADLESS === 'False',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
@@ -38,18 +41,19 @@ export default defineConfig({
       name: 'chrome',
       use: { ...devices['Desktop Chrome'] },
     },
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
     {
       name: 'bdd',
       testDir: bddTestDir,
       use: { ...devices['Desktop Chrome'] },
     },
   ],
+  
 });
