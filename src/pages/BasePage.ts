@@ -1,4 +1,5 @@
-import { Page, expect } from '@playwright/test';
+import { Page, expect, Locator } from '@playwright/test';
+
 
 /**
  * Every page object extends this. It only holds behaviour that is truly
@@ -33,4 +34,22 @@ export abstract class BasePage {
   async expectStepActive(step: number): Promise<void> {
     await expect(this.page.getByTestId(`step-chip-${step}`)).toHaveClass(/active/);
   }
+
+  // Added on 11-Aug-2026
+  /** Waits for network activity to settle before checking anything on the page. */
+  async waitForPageLoad(): Promise<void> {
+    await this.page.waitForLoadState('networkidle');
+  }
+
+  /** Takes a screenshot — handy for debugging a failed step in either app. */
+  async screenshot(name: string): Promise<void> {
+    await this.page.screenshot({ path: `screenshots/${name}.png` });
+  }
+
+  /** Reads any error/message text off any locator, from any page. */
+  async getText(locator: Locator): Promise<string | null> {
+    return locator.textContent();
+  }
+
 }
+

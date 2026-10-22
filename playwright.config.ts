@@ -2,11 +2,13 @@ import { defineConfig, devices } from '@playwright/test';
 import { defineBddConfig } from 'playwright-bdd';
 
 const bddTestDir = defineBddConfig({
-  features: 'features/**/*.feature',
+  features: 'features/ui/**/*.feature',
   // pageFixtures.ts is included here (not just the step files) so bddgen
   // picks up the custom `test` it exports — that's what gives BDD steps
   // the same personalDetailsPage/jobDetailsPage/etc. fixtures as the plain specs.
   steps: ['steps/**/*.ts', 'src/fixtures/pageFixtures.ts'],
+  
+  // steps: 'src/steps/**/*.ts',          // Path to your step definition files
 });
 
 

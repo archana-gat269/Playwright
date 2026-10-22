@@ -1,9 +1,17 @@
 {
   "playwright.reuseBrowser": true,
   "playwright.showTrace": false,
-  "cucumberautocomplete.steps": ["steps/**/*.ts"],
-  "cucumberautocomplete.syncfeatures": "features/**/*.feature",
+
+  // Configuration for the official Cucumber extension
+  "cucumber.features": [
+    "features/**/*.feature"
+  ],
+  "cucumber.glue": [
+    "steps/**/*.ts"
+  ],
+
+  // Specific internal Playwright BDD compilation bindings
   "playwrightBdd.configPath": "playwright.config.ts",
   "playwrightBdd.featureFolder": "features/ui",
-  "playwrightBdd.stepsFolder": "src/pages"
+  "playwrightBdd.stepsFolder": "steps"
 }

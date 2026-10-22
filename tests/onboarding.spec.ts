@@ -2,7 +2,7 @@ import { test } from '../src/fixtures/pageFixtures';
 
 test.describe('Onboardly - Employee Onboarding Wizard', () => {
   test.beforeEach(async ({ personalDetailsPage }) => {
-    await personalDetailsPage.open();
+    await personalDetailsPage.openonboardly();
   });
 
   test('completes the wizard end to end and produces a submission id', async ({
@@ -30,6 +30,9 @@ test.describe('Onboardly - Employee Onboarding Wizard', () => {
     const healthPlan = 'Basic';
     const dependent1 = 'Riya Kim';
     const dependent2 = 'Dev Kim';
+    const dependent3 = 'Sam Kim';
+    const dependent4 = 'Mia Kim';
+    const dependent5 = 'Leo Kim';
     const retirementPct = '5';
 
     // Expected values on the success screen after submitting.
@@ -63,9 +66,11 @@ test.describe('Onboardly - Employee Onboarding Wizard', () => {
     await jobDetailsPage.goNext();
 
     await benefitsPage.selectHealthPlan(healthPlan);
-    await benefitsPage.setDependentsCount(2);
-    await benefitsPage.fillDependentName(0, dependent1);
-    await benefitsPage.fillDependentName(1, dependent2);
+    const dependentNames = [dependent1, dependent2,dependent3,dependent4,dependent5]; // or however many you have
+    for (let i = 0; i < dependentNames.length; i++) {
+    await benefitsPage.fillDependentName(i, dependentNames[i]);
+}
+
     await benefitsPage.fillRetirementPct(retirementPct);
     await benefitsPage.checkEquityGrant();
     await benefitsPage.goNext();
