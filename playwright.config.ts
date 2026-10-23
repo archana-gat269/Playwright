@@ -39,14 +39,14 @@ export default defineConfig({
     navigationTimeout: 20_000,
   },
   projects: [
-    {
-      name: 'chrome',
-      use: { ...devices['Desktop Chrome'] },
-    },
     // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
+    //   name: 'chrome',
+    //   use: { ...devices['Desktop Chrome'] },
     // },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
     // {
     //   name: 'webkit',
     //   use: { ...devices['Desktop Safari'] },
@@ -54,7 +54,7 @@ export default defineConfig({
     {
       name: 'bdd',
       testDir: bddTestDir,
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Firefox'] },
     },
   ],
   
