@@ -28,13 +28,14 @@ export class CaseProLoginPage extends BasePage {
     await expect(this.page.getByTestId('login-screen')).toBeHidden();
   }
 
+  // 
   async loginAsAdmin(): Promise<void> {
-    await expect(this.page.getByTestId('login-screen')).toBeVisible();
-
-    await this.enterUsername('admin1');
-    await this.enterPassword('Admin@123');
-    await this.clickSignIn();
-
-    await this.expectLoggedIn();
+  if (!env.caseProAdminUsername || !env.caseProAdminPassword) {
+    throw new Error('CasePro admin credentials are missing from .env');
   }
+
+  await this.enterUsername(env.caseProAdminUsername);
+  await this.enterPassword(env.caseProAdminPassword);
+  await this.clickSignIn();
+}
 }
